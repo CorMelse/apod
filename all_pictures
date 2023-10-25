@@ -1,0 +1,81 @@
+#!/usr/local/bin/python
+# Downloads the current "Astronomy Picture of the Day" from nasa.gov and sets as wallpaper
+#
+# Installation steps:
+# - store this file somewhere and take note of the path
+# - change WALLPAPER_DIR to some folder in your home directory
+#   and create the folder
+# - make it executable:
+#   chmod a+x /path/to/change_wallpaper
+# - follow instructions given in the .plist file to make it run daily
+#
+# https://towardsdatascience.com/~
+#       a-tutorial-on-scraping-images-from-the-web-using-beautifulsoup-206a7633e948
+
+from bs4 import BeautifulSoup
+from urllib.request import urlretrieve
+from PIL import Image, ImageFont, ImageDraw
+import requests
+import subprocess, re, datetime
+import os.path, os
+
+FEED_URL = "http://apod.nasa.gov/apod/archivepix.html"
+WALLPAPER_DIR = "/Users/melsec/Pictures/Wallpapers"
+
+def main():
+    html_page = requests.get(FEED_URL)
+    soup = BeautifulSoup(html_page.content, 'html.parser')
+    images = soup.findAll('img')
+    hrefs = soup.findAll('a', href=True)
+    for el in hrefs:
+        print (el['href'], el.string)
+    #print (hrefs[1].attrs['href'])
+    #center = soup.findAll('center')
+    #iframe = soup.findAll('iframe')
+    #bold = soup.findAll('b')
+    #imgApod = FEED_URL + images[0].attrs['src']
+    #imgApod = FEED_URL + hrefs[1].attrs['href']
+    #vidApod = iframe[0].attrs['src']
+    # youtube_dl video -> http://stackoverflow.com/questions/18054500
+    #imgTitle = str(bold[0])
+    #imgTitle = imgTitle[4:-5]
+    #imgName = re.sub(r"^.*/", "", imgApod)
+    #imgFilename = "%s/%s-%s" % (WALLPAPER_DIR, str(datetime.date.today()), imgName)
+
+    #print ("Image URL:", imgApod)
+    #print ("Filename:", imgName)
+    #print ("Title:", imgTitle)
+    #print ("Target file:", imgFilename)
+
+    #if os.path.isfile(imgFilename):
+    #    print ("File already exists.")
+    #else:
+    #    #print ("Downloading...")
+    #    urlretrieve(imgApod, imgFilename)
+    #    #set_desktop_background(imgFilename
+
+    #imgFile = Image.open(imgFilename)
+    #imgSizeW,imgSizeH = imgFile.size
+    #print ("Width = ",imgSizeW, end="\t")
+    #print ("Height = ",imgSizeH)
+    # Retina display 15,4" = 2880 × 1800 px
+    #title_text = imgTitle
+    #title_fontsize = 15
+    #title_font = ImageFont.truetype('Krungthep', title_fontsize)
+    #image_editable = ImageDraw.Draw(imgFile)
+    #mage_editable.text((30,imgSizeH - (10 + title_fontsize)), title_text, (237, 230, 211), font=title_font)
+    #imgFile.save(imgFilename)
+
+    #set_desktop_background(imgFilename)
+
+#SCRIPT = """/usr/bin/osascript -s o<<END
+#tell application "Finder"
+#set desktop picture to POSIX file "%s"
+#end tell
+#END"""
+
+#def set_desktop_background(filename):
+    #print ("Changing wallpaper...", filename)
+#    subprocess.check_call(SCRIPT%filename, shell=True)
+
+main()
