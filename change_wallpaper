@@ -1,4 +1,4 @@
-#!/usr/local/bin/python
+#!/opt/homebrew/bin/python3
 # Downloads "Astronomy Picture of the Day" apod.nasa.gov and sets as wallpaper
 #
 # Installation steps:
@@ -48,12 +48,12 @@ def main():
 
     # print ("Image URL:", imgApod)
     # print ("Filename:", imgName)
-    print ("Title:", imgTitle)
+    # print ("Title:", imgTitle)
     # print ("Target file:", imgFilename)
 
-    if os.path.isfile(imgFilename):
-        print("File already exists.")
-    else:
+    if not os.path.isfile(imgFilename):
+        # print("File already exists.")
+    #else:
         # print("Downloading...")
         urlretrieve(imgApod, imgFilename)
         # set_desktop_background(imgFilename
