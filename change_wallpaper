@@ -56,19 +56,19 @@ def main():
     #else:
         # print("Downloading...")
         urlretrieve(imgApod, imgFilename)
-        # set_desktop_background(imgFilename
+        # set_desktop_background(imgFilename)
 
-    imgFile = Image.open(imgFilename)
-    imgSizeW, imgSizeH = imgFile.size
-    # print ("Width = ",imgSizeW, end="\t")
-    # print ("Height = ",imgSizeH)
-    # Retina display 15,4" = 2880 × 1800 px
-    title_text = imgTitle
-    title_fontsize = 20
-    title_font = ImageFont.truetype('Krungthep', title_fontsize)
-    image_editable = ImageDraw.Draw(imgFile)
-    image_editable.text((30, imgSizeH - (10 + title_fontsize)), title_text, (237, 230, 211), font=title_font)
-    imgFile.save(imgFilename)
+        imgFile = Image.open(imgFilename)
+        imgSizeW, imgSizeH = imgFile.size
+        # print ("Width = ",imgSizeW, end="\t")
+        # print ("Height = ",imgSizeH)
+        # Retina display 15,4" = 2880 × 1800 px
+        title_text = imgTitle
+        title_fontsize = 20
+        title_font = ImageFont.truetype('Krungthep', title_fontsize)
+        image_editable = ImageDraw.Draw(imgFile)
+        image_editable.text((30, imgSizeH - (10 + title_fontsize)), title_text, (237, 230, 211), font=title_font)
+        imgFile.save(imgFilename)
 
     set_desktop_background(imgFilename)
 
